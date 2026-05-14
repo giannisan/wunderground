@@ -173,26 +173,26 @@ stations = {
 ## Help
 Ptint help message:
 ```python
-python3 wundergroud.py -h
+python3 wunderground.py -h
 ```
 
 ```python3
-python3 wundergroud.py --help
+python3 wunderground.py --help
 ```
 
 ## Default behavior
-After we have configured the station(s) and added your api key in config.py, we can just run the wundergroud.py. This will use the default parameters in config.py and fetch data for all stations in all groups, and save them in .csv files.
+After we have configured the station(s) and added your api key in config.py, we can just run the wunderground.py. This will use the default parameters in config.py and fetch data for all stations in all groups, and save them in .csv files.
 
 By default, for each csv file, the latest observation's datetime will be checked, and we will get data from that date untill the runtime date.
 If there are no csv files (or if they are empty), the default START_DATE in confing.py will be used.
 
 ```python
-python3 wundergroud.py
+python3 wunderground.py
 ```
 
 Output:
 ```bash
-$ python3 wundergroud.py
+$ python3 wunderground.py
 
 osaka I27TSURU2, getting history-hourly-metric data from 2023-03-22, to 2023-04-25, storing to csv
 osaka I27TSURU2, 1: 2023-03-22, Observations: 24, Existing: 0, Inserted: 24
@@ -216,7 +216,7 @@ This will create the data directory with a subdirectory for each group and a sub
 If we want to get data only for the stations that are in a specific group(s), we can just run the script with the **--groups** (**-g**) argument following by the group(s') name(s). Group names and their stations are defined in config.py
 
 ```python
-python3 wundergroud.py --groups athens my_group
+python3 wunderground.py --groups athens my_group
 ```
 
 
@@ -226,7 +226,7 @@ The following will fetch data starting from 2023-01-31 (by default, it will end 
 This argument will ignore the latest date in csv. Don't worry about getting duplicate data because those will be rejected.
 
 ```python
-python3 wundergroud.py --start 2023-01-31
+python3 wunderground.py --start 2023-01-31
 ```
 
 ## Get data until a particular date
@@ -234,7 +234,7 @@ If we want to get data until a specific date, we can use the **--end** (**-e**) 
 The following will fetch data only untill 2023-02-28
 
 ```python
-python3 wundergroud.py --end 2023-02-28
+python3 wunderground.py --end 2023-02-28
 ```
 
 
@@ -244,7 +244,7 @@ Use the **--start** and **--end** arguments followed by the interval dates.
 The following will fetch data for all groups in config.py:
 
 ```python
-python3 wundergroud.py --start 2023-01-01 --end 2023-03-31
+python3 wunderground.py --start 2023-01-01 --end 2023-03-31
 ```
 
 
@@ -253,19 +253,19 @@ If we want to get **daily** or **hourly** or **all** (all daily observations) da
 The following will get history hourly and all (all daily observations) data for all stations.
 
 ```python
-python3 wundergroud.py --history all hourly
+python3 wunderground.py --history all hourly
 ```
 
 
 ## Get hourly forecasting data
 If you want to get hourly forecasting for the next N days(N: 1, 2, 3, 7, 10, 15), run with the **--forecast-hourly** (**-fh**) argument.
-We can use this in order to build a dataset with the forecasting values that are provided by Wundergroud.
+We can use this in order to build a dataset with the forecasting values that are provided by Wunderground.
 Forecasting data that we can get, starts from the requested time until 24\*N hours later. We cant get earlier forecasting values (e.g. to compare them with the actual measured ones).
 There are six modes available: 1day, 2day, 3day, 7day, 10day and 15day. We can use this to build a dataset if we request forecasting data at the same time each day. To avoid unwanted duplicate data we can use the FORECAST_HOURLY_AFTER_N_HOURS= variable in the config file in order to allow new data entries after N hours from the last request.
 
 
 ```python
-python3 wundergroud.py --forecast-hourly 1day
+python3 wunderground.py --forecast-hourly 1day
 ```
 
 ## Specify measurment units
@@ -273,7 +273,7 @@ We can use the **--units** parameter to retrive observesions in metric or/and im
 The command below will fetch data both in metric and impetrial units and will save them in seperated csv files for each station.
 
 ```python
-python3 wundergroud.py --units m e
+python3 wunderground.py --units m e
 ```
 
 
@@ -286,7 +286,7 @@ The following will get data for the stations in 'my_group' and 'osaka' groups, f
 Only new observations will be saved in each station's csv file, along with the existing ones (if there are any). No duplicates will be added.
 
 ```python
-python3 wundergroud.py --groups my_group osaka --start 2021-11-31 --end 2022-12-31 -u m
+python3 wunderground.py --groups my_group osaka --start 2021-11-31 --end 2022-12-31 -u m
 ```
 
 
